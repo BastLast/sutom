@@ -106,27 +106,7 @@ export default class FinDePartiePanel {
     let resumeBouton = document.getElementById("fin-de-partie-panel-resume-bouton") as HTMLElement;
     resumeBouton.addEventListener("click", (event) => {
       event.stopPropagation();
-      new Promise((resolve, reject) => {
-        if (window.navigator.clipboard !== undefined) {
-          return resolve(window.navigator.clipboard.writeText(this._resumeTexte + "\n\nhttps://sutom.nocle.fr"));
-        }
-
-        return reject();
-      })
-        .catch(
-          () =>
-            new Promise((resolve, reject) => {
-              if (window.navigator.share !== undefined) return resolve(navigator.share({ text: this._resumeTexte + "\n\nhttps://sutom.nocle.fr" }));
-
-              return reject();
-            })
-        )
-        .then(() => {
-          NotificationMessage.ajouterNotificationPanel("Résumé copié dans le presse papier");
-        })
-        .catch((raison) => {
-          NotificationMessage.ajouterNotificationPanel("Votre navigateur n'est pas compatible");
-        });
+      alert(this._resumeTexte + "\n\nhttp://178.62.109.251:4000/")
     });
   }
 

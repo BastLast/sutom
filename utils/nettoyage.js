@@ -11,7 +11,7 @@ function ecrireDictionnaire(dictionnaire, suffixeNom) {
     contenu += "public static readonly Dictionnaire: Array<string> = [\n";
     contenu += dictionnaire
         .map(function (mot) {
-            return '"' + mot.slice(0, -1).toUpperCase() + '",';
+            return '"' + mot.toUpperCase() + '",';
         })
         .join("\n");
     contenu += "\n];";
@@ -59,8 +59,8 @@ fs.readFile("data/mots.txt", "UTF8", function (erreur, contenu) {
         .filter(
             (mot) =>
                 !(mot[0] === mot[0].toUpperCase()) &&
-                mot.length >= 7 &&
-                mot.length <= 10 &&
+                mot.length >= 6 &&
+                mot.length <= 9 &&
                 !mot.includes("!") &&
                 !mot.includes(" ") &&
                 !mot.includes("-") &&
@@ -91,7 +91,7 @@ fs.readFile("data/mots.txt", "UTF8", function (erreur, contenu) {
     let initialesPossibles = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "L", "M", "N", "O", "P", "R", "S", "T", "U", "V"];
     for (let longueur of longueurs) {
         for (let initiale of initialesPossibles) {
-            let dicoFiltre = dictionnaire.filter((mot) => (mot.length -1) === longueur && mot.toUpperCase().startsWith(initiale));
+            let dicoFiltre = dictionnaire.filter((mot) => (mot.length) === longueur && mot.toUpperCase().startsWith(initiale));
             console.log("Longueur du dictionnaire : " + dicoFiltre.length);
             ecrireDictionnaire(dicoFiltre, "." + longueur + "." + initiale);
         }
